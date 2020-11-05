@@ -70,8 +70,8 @@
                     </div>
                     <div class="col-md-7">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Catálogo de videjuegos</a></li>
-                            <li><a href="#">Mi biblioteca</a></li>
+                            <li class="active"><a href="Principal2 - Catálogo.html">Catálogo de videjuegos</a></li>
+                            <li><a href="">Mi biblioteca</a></li>
                             <li><a href="vistaperfil.html">Perfil</a></li>
                         </ul>
                     </div>
@@ -81,6 +81,12 @@
             </div>
         </section>
     </header>
+
+    <br>
+    <br>
+    <h1 style="color: white; text-align: center; font-size: xx-large;">Mis juegos: </h1>
+    <br>
+    <hr>
 
     <div class="related-products">
         <div class="product">
@@ -106,8 +112,9 @@
 
         function cargar() {
             var nombre = sessionStorage.getItem('usuario');
+            var idUser = sessionStorage.getItem('id');
 
-            fetch('http://127.0.0.1:5000/obtenerJuegos', {
+            fetch(`http://127.0.0.1:5000/compras/${idUser}`, {
 
             }).then(res => res.json())
                 .catch(err => {

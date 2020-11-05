@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Principal Clientes</title>
+    <title>Principal Admin</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -30,6 +30,7 @@
                             <a href="loginvista.html">
                                 <p><span><i class="fa fa-user"></i></span>Cerrar Sesión</p>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -43,7 +44,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form method="post" action="#">
-                                    <input type="text" placeholder="Buscar">
+
+                                    <input id="busqueda" type="text" placeholder="Buscar">
+
                                     <select>
                                         <option>Acción</option>
                                         <option>Terror</option>
@@ -51,13 +54,15 @@
                                         <option>Puzzle</option>
                                         <option>Misterio</option>
                                     </select>
-                                    <button><i class="fa fa-search"></i></button>
+
+                                    <button type="button" onclick="buscar()"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div>
                 <img id="Logo" src="Logo Tienda.jpg" alt="">
             </div>
@@ -70,9 +75,13 @@
                     </div>
                     <div class="col-md-7">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Catálogo de videjuegos</a></li>
-                            <li><a href="#">Mi biblioteca</a></li>
+                            <li class="active"><a href="Principal1 - Catálogo.html">Catálogo de videjuegos</a></li>
+                            <li><a href="">Mi biblioteca</a></li>
                             <li><a href="vistaperfil.html">Perfil</a></li>
+                            <li><a href="cargaMasiva.html">Carga Masiva</a></li>
+                            <li><a href="#">CRUD de videjuegos</a></li>
+                            <li><a href="#">Generar Reportes</a></li>
+                            <li><a href="RegistroAdmins.html">Crear Usuario</a></li>
                         </ul>
                     </div>
                     <div class="col-md-2">
@@ -82,6 +91,11 @@
         </section>
     </header>
 
+    <br>
+    <br>
+    <h1 style="color: white; text-align: center; font-size: xx-large;">Mis juegos: </h1>
+    <br>
+    <hr>
     <div class="related-products">
         <div class="product">
             <div id="gameCards" class="row">
@@ -89,25 +103,25 @@
             </div>
         </div>
     </div>
-    </div>
 
+    </div>
 
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.bxSlider.js"></script>
-    <script>
-
-    </script>
+    <script></script>
     <script src="js/active.js"></script>
+
 
     <script>
 
         function cargar() {
             var nombre = sessionStorage.getItem('usuario');
+            var idUser = sessionStorage.getItem('id')
 
-            fetch('http://127.0.0.1:5000/obtenerJuegos', {
+            fetch(`http://127.0.0.1:5000/compras/${idUser}`, {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -138,6 +152,17 @@
                     });
                 })
         }
+
+        function buscar() {
+            var buscar = document.querySelector('#busqueda').value
+            sessionStorage.setItem("buscar", buscar)
+            location.href = "busquedas.html"
+        }
+
+        function buscarJ(){
+            sessionStorage
+        }
+
     </script>
 
 </body>

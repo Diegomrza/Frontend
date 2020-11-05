@@ -93,7 +93,7 @@
 
             var busqueda = sessionStorage.getItem('buscar')
 
-            fetch(`https://proyecto2-201901429.herokuapp.com/juegos/${busqueda}`, {
+            fetch(`http://127.0.0.1:5000/juegos/${busqueda}`, {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -115,7 +115,7 @@
                         mis_juegos.forEach(juego => {
                             game_cards.innerHTML += `<div class="col-md-3">
                     <div class="s_product">
-                        <a href=""><img id="imagen" alt="" src="${juego.foto}"></a>
+                        <a href="vistaJuego.html"><img id="imagen" alt="" src="${juego.foto}"></a>
                     </div>
                     <div class="row">
                         <div class="col-md-12">

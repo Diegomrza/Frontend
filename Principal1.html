@@ -76,7 +76,7 @@
                     <div class="col-md-7">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="Principal1 - Catálogo.html">Catálogo de videjuegos</a></li>
-                            <li><a href="#">Mi biblioteca</a></li>
+                            <li><a href="Principal1 - biblioteca.html">Mi biblioteca</a></li>
                             <li><a href="vistaperfil.html">Perfil</a></li>
                             <li><a href="cargaMasiva.html">Carga Masiva</a></li>
                             <li><a href="#">CRUD de videjuegos</a></li>
@@ -115,7 +115,7 @@
         function cargar() {
             var nombre = sessionStorage.getItem('usuario');
 
-            fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos', {
+            fetch('http://127.0.0.1:5000/obtenerJuegos', {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -131,7 +131,7 @@
                     mis_juegos.slice(0,4).forEach(juego => {
                         game_cards.innerHTML += `<div class="col-md-3">
                     <div class="s_product">
-                        <a href="vistaJuego.html?id=${juego.id}"><img id="imagen" alt="" src="${juego.foto}">
+                        <a href="vistaJuego.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}">
                     </div>
                     <div class="row">
                         <div class="col-md-12">

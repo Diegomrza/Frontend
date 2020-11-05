@@ -129,7 +129,7 @@
                 "tipo": "administrador"
             }
 
-            fetch(`https://proyecto2-201901429.herokuapp.com/registroAdmin/`, {
+            fetch(`http://127.0.0.1:5000/registroAdmin/`, {
                 method: 'POST',
                 body: JSON.stringify(objeto),
                 headers:{
@@ -142,8 +142,13 @@
                 })
                 .then(response => {
                     console.log(response)
-                    alert("usuario creado")
+                    if (password == confirmPassword){
+                        alert("usuario creado")
                     location.href="Principal1.html"
+                    } else{
+                        alert("las contraseñas no coinciden")
+                    }
+                    
                 })
 
         }
