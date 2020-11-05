@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Carga Masiva</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery.bxSlider.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <section class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="a-right">
+                            <a href="loginvista.html">
+                                <p><span><i class="fa fa-user"></i></span>Cerrar Sesión</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="header-catagory">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="post" action="#">
+                                    <input type="text" placeholder="Buscar">
+                                    
+                                    <select>
+                                        <option>Acción</option>
+                                        <option>Terror</option>
+                                        <option>Aventura</option>
+                                        <option>Puzzle</option>
+                                        <option>Misterio</option>
+                                    </select>
+                                    
+                                    <button><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img id="Logo" src="Logo Tienda.jpg" alt="">
+            </div>
+
+            <!--Input para seleccionar el archivo-->
+            <input style="margin: 0 auto;" type="file" id="file">
+
+            <button type="button" onclick="cargarArchivo()" style="margin-left: 50%; transform: translateX(-50%); width: 300px; margin-top: 50px;color: black; background-color: white; border: 1px solid #530472;">
+                Cargar Juegos del archivo</button>
+
+            <br>
+            <br>
+    </header>
+
+    <!-- -->
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.bxSlider.js"></script>
+    <script>                            </script>
+    <script src="js/active.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+    <script>
+        
+
+        function cargarArchivo() {
+            $('#file').parse({
+                config: {
+                    delimiter: ",",
+                    complete: GuardarJuegos,
+                },
+                before: function (file, inputElem) {
+                    console.log("Parsing file...", file);
+                },
+                error: function (err, file) {
+                    console.log("ERROR:", err, file);
+                },
+                complete: function () {
+                    console.log("Done with all files");
+                }
+            });
+        }
+
+        function GuardarJuegos(results) {
+            console.log(results.data)
+            var data = results.data
+
+            for (i = 0; i < data.length; i++) {
+                var nombre = data[i][0]
+                var anio = data[i][1]
+                var precio = data[i][2]
+                var categoria1 = data[i][3]
+                var categoria2 = data[i][4]
+                var categoria3 = data[i][5]
+                var foto = data[i][6]
+                var banner = data[i][7]
+                var descripcion = data[i][8]
+
+                var objeto = {
+                    'nombre': nombre,
+                    'anio': anio,
+                    'precio': precio,
+                    'categoria1': categoria1,
+                    'categoria2': categoria2,
+                    'categoria3': categoria3,
+                    'foto': foto,
+                    'banner': banner,
+                    'descripcion': descripcion
+                }
+                fetch('http://127.0.0.1:5000/juegos/', {
+                    method: 'POST',
+                    body: JSON.stringify(objeto),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(res => res.json())
+                    .catch(error => {
+                        console.error('Error:', error)
+                        //alert("Ocurrio un error al consumir la API, revise la consola")
+                    })
+                    .then(response => {
+                        console.log('Success:', response);
+                    });
+            }
+            alert("Etsito")
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vista Perfil</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery.bxSlider.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="cargarDatosUsuario()">
+    <header>
+        <section class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="a-right">
+                            <a href="loginvista.html">
+                                <p><span><i class="fa fa-user"></i></span>Cerrar Sesión</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="header-catagory">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="post" action="#">
+                                    <input type="text" placeholder="Buscar">
+                                    <select>
+                                        <option>Acción</option>
+                                        <option>Terror</option>
+                                        <option>Aventura</option>
+                                        <option>Puzzle</option>
+                                        <option>Misterio</option>
+                                    </select>
+                                    <button><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <img id="Logo" src="Logo Tienda.jpg" alt="">
+            </div>
+        
+
+            <h1 style="text-align: center;" >Perfil de usuario</h1>
+
+        <br>
+        <br>
+    </header>
+
+    <form class="formularioN">
+        <div>
+            <div>
+                <label for="name">Nombre</label>
+                <input id="nombre" type="text">
+            </div>
+
+            <div>
+                <label for="name">Apellido</label>
+                <input id="apellido" type="text">
+            </div>
+
+            <div>
+                <label for="name">Usuario</label>
+                <input id="usuario" type="text">
+            </div>
+
+            <div>
+                <label for="name">Contraseña</label>
+                <input id="password" type="text">
+            </div>
+
+            <br>
+            <div>
+                <button type="button" onclick="cambiar()">Aceptar Cambios</button>
+                <button type="button" onclick="cancelar()">Cancelar</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- -->
+
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.bxSlider.js"></script>
+    <script></script>
+    <script src="js/active.js"></script>
+
+    <script>
+
+        function cargarDatosUsuario() {
+            var nombre = sessionStorage.getItem('usuario')
+            var id = sessionStorage.getItem('id')
+
+            fetch(`http://localhost:5000/usuarios/${id}`, {
+
+            }).then(res => res.json())
+                .catch(err => {
+                    console.log(err)
+
+                })
+                .then(response => {
+                    console.log(response)
+
+                    document.querySelector("#nombre").value = response.nombre
+                    document.querySelector("#apellido").value = response.apellido
+                    document.querySelector("#usuario").value = response.usuario
+                    document.querySelector("#password").value = response.password
+
+                })
+
+        }
+
+        function cambiar() {
+
+            var id = sessionStorage.getItem('id')
+            var tipo = sessionStorage.getItem('tipo')
+
+            var nombre = document.querySelector('#nombre').value
+            var apellido = document.querySelector('#apellido').value
+            var usuario = document.querySelector('#usuario').value
+            var password = document.querySelector('#password').value
+            console.log(id)
+            var objeto = {
+                'nombre': nombre,
+                'apellido': apellido,
+                'usuario': usuario,
+                'password': password
+            }
+            console.log(objeto)
+            fetch(`http://localhost:5000/usuarios/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(objeto),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .catch(err => {
+                    console.error('Error', err)
+                    window.alert("ocurrio un error, ver consola")
+                })
+                .then(response => {
+                    console.log('Success:', response);
+                    alert(response.message)
+                    if (tipo == "administrador"){
+                        location.href = "Principal1.html"
+                    } else{
+                        location.href="Principal2.html"
+                    }
+
+                })
+
+        }
+
+        function cancelar() {
+            var tipoU = sessionStorage.getItem('tipo')
+            if (tipoU == "administrador"){
+                location.href="Principal1.html"
+            } else{
+                location.href="Principal2.html"
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
