@@ -93,7 +93,7 @@
 
             var busqueda = sessionStorage.getItem('buscar')
 
-            fetch(`http://localhost:5000/juegos/${busqueda}`, {
+            fetch(`https://proyecto2-201901429.herokuapp.com/juegos/${busqueda}`, {
 
             }).then(res => res.json())
                 .catch(err => {

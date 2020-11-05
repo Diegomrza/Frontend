@@ -115,7 +115,7 @@
         function cargar() {
             var nombre = sessionStorage.getItem('usuario');
 
-            fetch('http://127.0.0.1:5000/obtenerJuegos', {
+            fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos', {
 
             }).then(res => res.json())
                 .catch(err => {
