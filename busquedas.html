@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <META HTTP-EQUIV="REFRESH" CONTENT="6;URL=busquedas.html"> 
     <title>Resultado de la busqueda</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
@@ -50,7 +51,7 @@
                                         <option>Puzzle</option>
                                         <option>Misterio</option>
                                     </select>
-                                    <button><i class="fa fa-search"></i></button>
+                                    <button onclick="buscar()" type="button" ><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -89,7 +90,7 @@
 
             var busqueda = sessionStorage.getItem('buscar')
 
-            fetch(`https://proyecto2-201901429.herokuapp.com/juegos/${busqueda}`, {
+            fetch(`http://127.0.0.1:5000/juegos/${busqueda}`, {
 
             }).then(res => res.json())
                 .catch(err => {

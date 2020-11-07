@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CRUD</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="VistaJuegos.css">
+</head>
+
+<body>
+
+    <div id="contenedor0">
+        <!--header-->
+        <div id="header0">
+            <div id="cerr">
+                <img id="LogoTienda" src="Logo Tienda.jpg" alt="">
+                <input type="text" id="buscar" placeholder="Buscar videojuegos por género">
+                <button type="button" id="botonBusqueda">Buscar</button>
+                <a href="" id="botonHeader">Cerrar Sesión</a>
+            </div>
+        </div>
+        <!--nav-->
+        <div id="nav0">
+            <ul>
+                <li id="pestaña1"><a href="vistaperfil.html">Perfil</a></li>
+                <li id="pestaña2"><a href="Principal1 - biblioteca.html">Mi Biblioteca</a></li>
+                <li id="pestaña3"><a href="Principal1 - Catálogo.html">Catálogo de videojuegos</a></li>
+                <li id="pestaña4"><a href="cargaMasiva.html">Carga Masiva</a></li>
+                <li id="pestaña5"><a href="CRUD.html">CRUD</a></li>
+                <li id="pestaña6"><a href="">Generar Reportes</a></li>
+                <li id="pestaña7"><a href="RegistroAdmins.html">Crear usuario</a></li>
+            </ul>
+        </div>
+        <!--banner-->
+        <!--contenido-->
+        <div id="contenido">
+
+            <div id="crud">
+
+                <button onclick="crear()" id="boton1" type="button">Crear videojuego</button><br>
+                <button onclick="ver()" id="boton2" type="button">Ver videojuego</button><br>
+                <button onclick="modificar()" id="boton3" type="button">Modificar videojuego</button><br>
+                <button onclick="eliminar()" id="boton4" type="button">Eliminar videjuego</button><br>
+
+            </div>
+
+        </div>
+        <!--comentarios-->
+
+    </div>
+
+    <script>
+
+        function crear(){
+            alert("Crear")
+        }
+
+        function ver(){
+            alert("ver")
+        }
+
+        function modificar(){
+            alert("Modificar")
+        }
+
+        function eliminar(){
+            alert("Eliminar")
+        }
+
+    </script>
+
+</body>
+
+</html>

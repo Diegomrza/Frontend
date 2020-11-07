@@ -70,11 +70,12 @@
                 style="margin-left: 50%; transform: translateX(-50%); width: 300px; margin-top: 50px;color: black; background-color: white; border: 1px solid #530472;">
                 Cargar Juegos del archivo</button>
 
+            <button type="button" onclick="cancelar()"
+                style="margin-left: 50%; transform: translateX(-50%); width: 300px; margin-top: 50px;color: black; background-color: white; border: 1px solid #530472;">Regresar</button>
+
             <br>
             <br>
     </header>
-
-    <!-- -->
 
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -86,7 +87,6 @@
 
     <script>
 
-
         function cargarArchivo() {
             $('#file').parse({
                 config: {
@@ -94,21 +94,18 @@
                     complete: GuardarJuegos,
                 },
                 before: function (file, inputElem) {
-                    console.log("Parsing file...", file);
                 },
                 error: function (err, file) {
                     console.log("ERROR:", err, file);
                 },
                 complete: function () {
-                    console.log("Done with all files");
+                    console.log("Done!");
                 }
             });
         }
 
         function GuardarJuegos(results) {
-            console.log(results.data)
             var data = results.data
-
             var nombre = data[0][0]
             var anio = data[0][1]
             var precio = data[0][2]
@@ -130,8 +127,6 @@
                 'banner': banner,
                 'descripcion': descripcion
             }
-            console.log(encabezado)
-
             for (i = 1; i < data.length; i++) {
                 var nombre = data[i][0]
                 var anio = data[i][1]
@@ -154,7 +149,7 @@
                     'banner': banner,
                     'descripcion': descripcion
                 }
-                fetch('https://proyecto2-201901429.herokuapp.com/juegos/', {
+                fetch('http://127.0.0.1:5000/juegos/', {
                     method: 'POST',
                     body: JSON.stringify(objeto),
                     headers: {
@@ -162,16 +157,18 @@
                     }
                 }).then(res => res.json())
                     .catch(error => {
-                        //alert("Ocurrio un error al consumir la API, revise la consola")
                     })
                     .then(response => {
-                        alert("Archivo Cargado Correctamente")
                     });
             }
-            
+            alert("Archivo Cargado Correctamente")
         }
-    </script>
 
+        function cancelar(){
+            location.href="Principal1.html"
+        }
+
+    </script>
 </body>
 
 </html>

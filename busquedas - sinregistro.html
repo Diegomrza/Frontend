@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Vista Juego</title>
+    <META HTTP-EQUIV="REFRESH" CONTENT="8;URL=busquedas - sinregistro.html"> 
+    <title>Resultado de la busqueda</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -15,7 +16,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body onload="cargarDatoJuego()">
+<body onload="busquedaJuegos()">
     <header>
         <section class="header-top">
             <div class="container">
@@ -26,14 +27,9 @@
                     </div>
                     <div class="col-md-4">
                         <div class="a-right">
-
                             <a href="loginvista.html">
                                 <p><span><i class="fa fa-user"></i></span>Login</p>
                             </a>
-                            <a href="registrarvista.html">
-                                <p><span><i class="fa fa-pencil"></i></span>Register</p>
-                            </a>
-
                         </div>
                     </div>
                 </div>
@@ -47,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form method="post" action="#">
-                                    <input type="text" placeholder="Buscar">
+                                    <input id="busqueda" type="text" placeholder="Buscar">
                                     <select>
                                         <option>Acción</option>
                                         <option>Terror</option>
@@ -55,7 +51,7 @@
                                         <option>Puzzle</option>
                                         <option>Misterio</option>
                                     </select>
-                                    <button><i class="fa fa-search"></i></button>
+                                    <button onclick="buscar()" type="button"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -65,23 +61,21 @@
             <div>
                 <img id="Logo" src="Logo Tienda.jpg" alt="">
             </div>
-        <br>
-        <br>
-        <hr>
-        <br>
+
+
+            <h1 style="text-align: center; color: #FFFFFF">Resultados de la busqueda</h1>
+
+            <br>
+            <br>
     </header>
 
-    <div id="datos">
-
-        
+    <div class="related-products">
+        <div class="product">
+            <div id="gameCards" class="row">
+                
+            </div>
+        </div>
     </div>
-    
-    <div id="comentarios" >
-
-        <h5 style="color: white;"></h5>
-
-    </div>
-    
 
     <!-- -->
 
@@ -92,48 +86,54 @@
 
     <script>
 
+        function busquedaJuegos() {
 
-        function cargarDatoJuego() {
+            var busqueda = sessionStorage.getItem('buscar')
 
-            const queryString = window.location.search;
-            const URLParams = new URLSearchParams(queryString);
-            const id = URLParams.get('id')
-            console.log(id)
-
-            fetch(`https://proyecto2-201901429.herokuapp.com/juego/${id}`, {
+            fetch(`http://127.0.0.1:5000/juegos/${busqueda}`, {
 
             }).then(res => res.json())
                 .catch(err => {
                     console.log(err)
                 })
                 .then(response => {
-                    console.log(response)
 
-                    var games = document.querySelector('#datos')
+                    if (response.message == "sinResultados") {
+                        var game_cards = document.querySelector('#gameCards')
+                        game_cards.innerHTML += `<h2 style="text-align: center; margin-top: 150px; color: #000">Sin resultados :C</h2>`
+                    } else {
+                        var mis_juegos = response;
 
-                    games.innerHTML = `<div>
-            <img id="banner" src="${response.banner}" alt="">
-        </div>
+                        var game_cards = document.querySelector('#gameCards')
 
-        <h2 id="detalles">Detalles:</h2>
-
-        <div id="imagenPortada">
-            <img id="foto" style="width: 300px;" src="${response.foto}" alt="">
-        </div>
-    
-        <div id="datosJuego">
-            <h2 id="nombre" style="color: white;">${response.nombre}</h2>
-            <h4 id="categorias" style="color: white;">${response.categoria1}, ${response.categoria2}, ${response.categoria3}</h4>
-            <h4 id="precio" style="color: white;">${response.precio}</h4>
-            <h6 id="año" style="color: white; font-size: large;">${response.anio}</h6>
-            <h4 id="descripcion" style="color: white;">${response.descripcion}</h4>
-        </div>`
-
-              
-
+                        mis_juegos.forEach(juego => {
+                            game_cards.innerHTML += `<div class="col-md-3">
+                    <div class="s_product">
+                        <a href="VistaJuegos - sinregistro.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}"></a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="rate">
+                                <h3 style="text-align: center; color: #FFFFFF">${juego.nombre}</h3>
+                                <br>
+                                <h5 style="text-align: center; color: #FFFFFF">Q.${juego.precio}</h5>
+                            </div>
+                        </div>
+                    </div></br>
+                </div>`
+                        });
+                    }
                 })
-
         }
+
+        function buscar(){
+            var buscar = document.querySelector('#busqueda').value
+            sessionStorage.removeItem("buscar")
+            sessionStorage.setItem("buscar", buscar).value
+            location.href="busquedas - sinregistro.html"
+            
+        }
+
 
     </script>
 

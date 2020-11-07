@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Principal Clientes</title>
+    <title>Catálogo</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form method="post" action="#">
-                                    <input type="text" placeholder="Buscar">
+                                    <input id="busqueda" type="text" placeholder="Buscar">
                                     <select>
                                         <option>Acción</option>
                                         <option>Terror</option>
@@ -50,7 +50,7 @@
                                         <option>Puzzle</option>
                                         <option>Misterio</option>
                                     </select>
-                                    <button><i class="fa fa-search"></i></button>
+                                    <button onclick="buscarG()" type="button"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -69,8 +69,8 @@
                     </div>
                     <div class="col-md-7">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Catálogo de videjuegos</a></li>
-                            <li><a href="#">Mi biblioteca</a></li>
+                            <li class="active"><a href="Principal2 - Catálogo.html">Catálogo de videjuegos</a></li>
+                            <li><a href="Principal2 - biblioteca.html">Mi biblioteca</a></li>
                             <li><a href="vistaperfil.html">Perfil</a></li>
                         </ul>
                     </div>
@@ -101,7 +101,7 @@
         function cargar() {
             var nombre = sessionStorage.getItem('usuario');
 
-            fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos', {
+            fetch('http://127.0.0.1:5000/obtenerJuegos', {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -132,6 +132,14 @@
                     });
                 })
         }
+
+        function buscarG(){
+            var buscar = document.querySelector('#busqueda').value
+            sessionStorage.setItem("buscar", buscar)
+            location.href="busquedas.html"
+            
+        }
+
     </script>
 
 </body>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Document</title>
+    <title>VistaJuego Sin Registro</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="VistaJuegos.css">
@@ -15,32 +15,43 @@
         <div id="header">
             <div id="cerr">
                 <img id="LogoTienda" src="Logo Tienda.jpg" alt="">
+
                 <input type="text" id="buscar" placeholder="Buscar videojuegos por género">
-                <button type="button" id="botonBusqueda">Buscar</button>
+
+                <button onclick="buscar()" type="button" id="botonBusqueda">Buscar</button>
+
                 <a href="registrarvista.html" id="botonHeader2">Registrarse</a>
+
                 <a href="loginvista.html" id="botonHeader">iniciar Sesión</a>
+                
             </div>
         </div>
+        
         <!--nav-->
         <div id="nav">
             <ul>
                 <li id="pestaña3"><a href="Principal0 - Catálogo.html">Catálogo de videojuegos</a></li>
             </ul>
         </div>
+
         <!--banner-->
         <div id="banner">
 
         </div>
+
         <!--contenido-->
         <div id="contenido">
+
             <!--section-->
             <div id="section">
-                <img id="imagenPortada" src="" alt="">
+                
             </div>
+
             <!--aside-->
             <div id="aside">
 
                 <h2 id="titulo"></h2>
+                
                 <ul>
                     <li id="categoria1" class="categori"></li>
                     <li id="categoria2" class="categori"></li>
@@ -49,24 +60,21 @@
 
                 <h2 id="precio"></h2>
                 <h4 id="año"></h4>
-                <p id="descripcion">
-                </p>
+                <p id="descripcion"></p>
 
-                
             </div>
 
         </div>
         <!--comentarios-->
+        <hr>
+        <h2 style="text-align: center;">Comentarios</h2>
         <div id="footer">
-            <hr>
 
             <div id="comentarios">
 
             </div>
-
+            
             <div id="agregarComentarios">
-
-                
 
             </div>
 
@@ -76,21 +84,17 @@
     <script>
 
         function cargar() {
-
             const queryString = window.location.search;
             const URLParams = new URLSearchParams(queryString);
             const id = URLParams.get('id')
             console.log(id)
 
-            fetch(`https://proyecto2-201901429.herokuapp.com/juego/${id}`, {
-
+            fetch(`http://127.0.0.1:5000/juego/${id}`, {
             }).then(res => res.json())
                 .catch(err => {
                     console.log(err)
                 })
                 .then(response => {
-                    console.log(response)
-
                     var bannerts = document.querySelector('#banner');
                     var imagnts = document.querySelector('#section')
 
@@ -104,42 +108,35 @@
                     document.querySelector('#precio').innerHTML = "Q." + response.precio
                     document.querySelector('#año').innerHTML = response.anio
                     document.querySelector('#descripcion').innerHTML = response.descripcion
-
-
                 })
             cargarComentarios()
         }
 
-        
         function cargarComentarios() {
-
             const queryString = window.location.search;
             const URLParams = new URLSearchParams(queryString);
-            //Id del juego
             const id = URLParams.get('id')
 
-            fetch(`https://proyecto2-201901429.herokuapp.com/comentarios/${id}`, {
-
+            fetch(`http://127.0.0.1:5000/comentarios/${id}`, {
             }).then(res => res.json())
                 .catch(err => {
                     console.log(err)
                     alert('Ocurrio un error al momento de obtener los juegos')
                 })
                 .then(response => {
-
                     var mis_comentarios = response;
-                    console.log(mis_comentarios)
-
                     var coments = document.querySelector('#comentarios')
-
                     mis_comentarios.forEach(comentarios => {
                         coments.innerHTML += `<h3 class="parrafoComentario">${comentarios.usuario}</h3>
-                                                 <p style="padding: 10px;">${comentarios.comentario}</p>`
-
-
+                                                <p style="padding: 10px;">${comentarios.comentario}</p>`
                     });
                 })
+        }
 
+        function buscar() {
+            var buscar = document.querySelector('#buscar').value
+            sessionStorage.setItem("buscar", buscar)
+            location.href = "busquedas - sinregistro.html"
         }
 
 

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Principal Clientes</title>
+    <title>Mi Biblioteca</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form method="post" action="#">
-                                    <input type="text" placeholder="Buscar">
+                                    <input id="busqueda" type="text" placeholder="Buscar">
                                     <select>
                                         <option>Acción</option>
                                         <option>Terror</option>
@@ -50,7 +50,7 @@
                                         <option>Puzzle</option>
                                         <option>Misterio</option>
                                     </select>
-                                    <button><i class="fa fa-search"></i></button>
+                                    <button onclick="buscarG()" type="button"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
             var nombre = sessionStorage.getItem('usuario');
             var idUser = sessionStorage.getItem('id');
 
-            fetch(`https://proyecto2-201901429.herokuapp.com/compras/${idUser}`, {
+            fetch(`http://127.0.0.1:5000/compras/${idUser}`, {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -122,9 +122,11 @@
                     var game_cards = document.querySelector('#gameCards')
 
                     mis_juegos.forEach(juego => {
+                        var idSeparado = juego.id.split(',')
+
                         game_cards.innerHTML += `<div class="col-md-3">
                     <div class="s_product">
-                        <a href="VistaJuegos.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}">
+                        <a href="VistaJuegos.html?id=${idSeparado[0]}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}">
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -139,6 +141,14 @@
                     });
                 })
         }
+
+        function buscarG(){
+            var buscar = document.querySelector('#busqueda').value
+            sessionStorage.setItem("buscar", buscar)
+            location.href="busquedas.html"
+            
+        }
+
     </script>
 
 </body>

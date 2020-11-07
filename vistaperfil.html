@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Vista Perfil</title>
+    <title>Perfil</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <form method="post" action="#">
-                                    <input type="text" placeholder="Buscar">
+                                    <input id="busqueda" type="text" placeholder="Buscar">
                                     <select>
                                         <option>Acción</option>
                                         <option>Terror</option>
@@ -51,7 +51,7 @@
                                         <option>Puzzle</option>
                                         <option>Misterio</option>
                                     </select>
-                                    <button><i class="fa fa-search"></i></button>
+                                    <button onclick="buscarG()" type="button"><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -61,12 +61,12 @@
             <div>
                 <img id="Logo" src="Logo Tienda.jpg" alt="">
             </div>
-        
 
-            <h1 style="text-align: center;" >Perfil de usuario</h1>
 
-        <br>
-        <br>
+            <h1 style="text-align: center;">Perfil de usuario</h1>
+
+            <br>
+            <br>
     </header>
 
     <form class="formularioN">
@@ -115,7 +115,8 @@
             var nombre = sessionStorage.getItem('usuario')
             var id = sessionStorage.getItem('id')
 
-            fetch(`https://proyecto2-201901429.herokuapp.com/usuarios/${id}`, {
+
+            fetch(`http://127.0.0.1:5000/usuarios/${id}`, {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -144,14 +145,27 @@
             var usuario = document.querySelector('#usuario').value
             var password = document.querySelector('#password').value
             console.log(id)
-            var objeto = {
-                'nombre': nombre,
-                'apellido': apellido,
-                'usuario': usuario,
-                'password': password
+
+            if (usuario == sessionStorage.getItem('usuario')) {
+
+                var objeto = {
+                    'nombre': nombre,
+                    'apellido': apellido,
+                    'usuario': "",
+                    'password': password
+                }
+
+            } else {
+                var objeto = {
+                    'nombre': nombre,
+                    'apellido': apellido,
+                    'usuario': usuario,
+                    'password': password
+                }
             }
+
             console.log(objeto)
-            fetch(`https://proyecto2-201901429.herokuapp.com/usuarios/${id}`, {
+            fetch(`http://127.0.0.1:5000/usuarios/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify(objeto),
                 headers: {
@@ -165,10 +179,10 @@
                 .then(response => {
                     console.log('Success:', response);
                     alert(response.message)
-                    if (tipo == "administrador"){
+                    if (tipo == "administrador") {
                         location.href = "Principal1.html"
-                    } else{
-                        location.href="Principal2.html"
+                    } else {
+                        location.href = "Principal2.html"
                     }
 
                 })
@@ -177,11 +191,18 @@
 
         function cancelar() {
             var tipoU = sessionStorage.getItem('tipo')
-            if (tipoU == "administrador"){
-                location.href="Principal1.html"
-            } else{
-                location.href="Principal2.html"
+            if (tipoU == "administrador") {
+                location.href = "Principal1.html"
+            } else {
+                location.href = "Principal2.html"
             }
+        }
+
+        function buscarG() {
+            var buscar = document.querySelector('#busqueda').value
+            sessionStorage.setItem("buscar", buscar)
+            location.href = "busquedas.html"
+
         }
 
     </script>

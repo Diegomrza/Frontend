@@ -117,7 +117,7 @@
             var nombre = sessionStorage.getItem('usuario');
             var idUser = sessionStorage.getItem('id')
 
-            fetch(`https://proyecto2-201901429.herokuapp.com/compras/${idUser}`, {
+            fetch(`http://127.0.0.1:5000/compras/${idUser}`, {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -125,6 +125,7 @@
                     alert('Ocurrio un error al momento de obtener los juegos')
                 })
                 .then(response => {
+                    var idSeparado = juego.id.split(',')
 
                     var mis_juegos = response;
                     console.log(mis_juegos)
@@ -133,7 +134,7 @@
                     mis_juegos.forEach(juego => {
                         game_cards.innerHTML += `<div class="col-md-3">
                     <div class="s_product">
-                        <a href="VistaJuegos.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}">
+                        <a href="VistaJuegos - admin.html?id=${idSeparado[0]}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}">
                     </div>
                     <div class="row">
                         <div class="col-md-12">
