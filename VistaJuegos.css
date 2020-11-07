@@ -1,0 +1,183 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    
+    background: url(imagen3.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+/*Contenedor*/
+#contenedor{
+    width: 1300px;
+    height: 1500px;
+}
+/*Header*/
+#header{
+    height: 10%;
+    border-radius: 1em;
+    margin: 1em;
+    
+    background: linear-gradient(30deg,violet,black, darkorchid,darkorchid, black);
+}
+
+#cerr{
+    height: 15%;
+}
+
+#LogoTienda{
+    margin: 1em;
+}
+
+#buscar{
+    font-size: x-large;
+    width: 350px;
+    height: 50px;
+    position: relative;
+    top: -70px;
+    left: 5%;
+    border-radius: 60px 5px 5px 60px;
+}
+
+#botonBusqueda{
+    background-color: darkorchid;
+    width: 60px;
+    height: 53px;
+    position: relative;
+    top: -74px;
+    left: 4.6%;
+    border-radius: 5px 60px 60px 5px;
+}
+
+#botonHeader, #botonHeader2{
+    margin: 0.5em;
+    float: right;
+}
+
+/*nav*/
+#nav{
+    height: 7%;
+    margin: 1em;
+}
+
+#pestaña1, #pestaña2, #pestaña3{
+    font-size: 30px;
+    margin-top: 35px;
+    margin-left: 150px;
+    display: inline-block;
+}
+/*Banner*/
+#banner{
+    height: 20%;
+    margin: 1em;
+}
+
+#imagenbanner{
+    height: 100%;
+    width: 100%;
+}
+
+/*Contenido*/
+#contenido{
+    height: 45%;
+    margin: 1em;
+}
+
+#section{
+    height: 100%;
+    width: 51%;
+    float: left;
+    margin: 0.5em;
+}
+
+#section #imagenPortada{
+    margin-right: 50px;
+    margin-left: 50px;
+    width: 500px;
+    height: 550px;
+    border-style:  solid;
+}
+/*Aside*/
+#aside{
+    color: white;
+    height: 100%;
+    width: 45%;
+    float: right;
+    margin: 0.5em;
+    border-radius: 1em;
+    
+}
+
+#titulo{
+    padding-top: 5%;
+    margin-left: 25px;
+}
+
+.categori{
+    padding-top: 5%;
+    margin-left: 25px;
+    display: inline-block;
+}
+
+#precio{
+    padding-top: 5%;
+    margin-left: 25px;
+}
+
+#año{
+    padding-top: 5%;
+    margin-left: 25px;
+}
+
+#descripcion{
+    padding-top: 5%;
+    margin-left: 25px;
+}
+
+#biblioteca{
+    margin-top: 5%;
+    margin-left: 25px;
+    height: 35px;
+    width: 250px;
+    background-color: crimson;
+    border-radius: 1em;
+}
+
+/*footer*/
+#footer{
+    background-color: white;
+    margin: 1em;
+}
+
+#comentarios{
+    color: white;
+    margin-top: 25px;
+    margin-left: 60px;
+    width: 40%;
+    float: left;
+}
+
+#agregarComentarios{
+    width: 40%;
+    margin-top: 25px;
+    margin-right: 80px;
+    margin-bottom: 25px;
+    float: right;
+}
+
+.parrafoComentario{
+    margin-top: 20px;
+}
+
+#areaDeTexto{
+    font-size: large;
+}
+
+#botonAgregarComentarios{
+    border-radius: 1em;
+    width: 100px;
+    height: 25px;
+    background-color: crimson;
+}

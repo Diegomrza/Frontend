@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/magnific-popup.css">
     <link rel="stylesheet" href="css/jquery.bxSlider.css">
@@ -47,12 +46,13 @@
 
                                     <input id="busqueda" type="text" placeholder="Buscar">
 
-                                    <select>
-                                        <option>Acción</option>
+                                    <select id="seleccionar">
+                                        <option>Accion</option>
                                         <option>Terror</option>
                                         <option>Aventura</option>
                                         <option>Puzzle</option>
                                         <option>Misterio</option>
+                                        <option>Disparos</option>
                                     </select>
 
                                     <button type="button" onclick="buscar()"><i class="fa fa-search"></i></button>
@@ -102,12 +102,9 @@
     </div>
 
     <script src="js/jquery-3.1.1.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.magnific-popup.min.js"></script>
     <script src="js/jquery.bxSlider.js"></script>
-    <script></script>
-    <script src="js/active.js"></script>
 
 
     <script>
@@ -131,7 +128,7 @@
                     mis_juegos.slice(0,4).forEach(juego => {
                         game_cards.innerHTML += `<div class="col-md-3">
                     <div class="s_product">
-                        <a href="vistaJuego.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}">
+                        <a href="VistaJuegos.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}">
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -148,13 +145,11 @@
         }
 
         function buscar() {
+
             var buscar = document.querySelector('#busqueda').value
             sessionStorage.setItem("buscar", buscar)
             location.href = "busquedas.html"
-        }
-
-        function buscarJ(){
-            sessionStorage
+            
         }
 
     </script>
