@@ -115,7 +115,7 @@
             var nombre = sessionStorage.getItem('usuario')
             var id = sessionStorage.getItem('id')
 
-            fetch(`http://127.0.0.1:5000/usuarios/${id}`, {
+            fetch(`https://frontend-proyecto2-201901429.herokuapp.com/usuarios/${id}`, {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -151,7 +151,7 @@
                 'password': password
             }
             console.log(objeto)
-            fetch(`http://127.0.0.1:5000/usuarios/${id}`, {
+            fetch(`https://frontend-proyecto2-201901429.herokuapp.com/usuarios/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify(objeto),
                 headers: {

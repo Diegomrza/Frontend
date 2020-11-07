@@ -108,7 +108,7 @@
             var nombre = sessionStorage.getItem('usuario');
             var idUser = sessionStorage.getItem('id');
 
-            fetch(`http://127.0.0.1:5000/compras/${idUser}`, {
+            fetch(`https://frontend-proyecto2-201901429.herokuapp.com/compras/${idUser}`, {
 
             }).then(res => res.json())
                 .catch(err => {
