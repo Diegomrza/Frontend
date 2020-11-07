@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <META HTTP-EQUIV="REFRESH" CONTENT="8;URL=busquedas - sinregistro.html"> 
+    <META HTTP-EQUIV="REFRESH" CONTENT="6;URL=busquedas.html"> 
     <title>Resultado de la busqueda</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
@@ -28,7 +28,7 @@
                     <div class="col-md-4">
                         <div class="a-right">
                             <a href="loginvista.html">
-                                <p><span><i class="fa fa-user"></i></span>Login</p>
+                                <p><span><i class="fa fa-user"></i></span>Cerrar Sesión</p>
                             </a>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                         <option>Puzzle</option>
                                         <option>Misterio</option>
                                     </select>
-                                    <button onclick="buscar()" type="button"><i class="fa fa-search"></i></button>
+                                    <button onclick="buscar()" type="button" ><i class="fa fa-search"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -95,21 +95,24 @@
             }).then(res => res.json())
                 .catch(err => {
                     console.log(err)
+
                 })
                 .then(response => {
+                    console.log(response)
+                    console.log(response.message)
 
                     if (response.message == "sinResultados") {
                         var game_cards = document.querySelector('#gameCards')
                         game_cards.innerHTML += `<h2 style="text-align: center; margin-top: 150px; color: #000">Sin resultados :C</h2>`
                     } else {
                         var mis_juegos = response;
-
+                        console.log(mis_juegos)
                         var game_cards = document.querySelector('#gameCards')
 
                         mis_juegos.forEach(juego => {
                             game_cards.innerHTML += `<div class="col-md-3">
                     <div class="s_product">
-                        <a href="VistaJuegos - sinregistro.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}"></a>
+                        <a href="VistaJuegos - admin.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}"></a>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -129,7 +132,7 @@
         function buscar(){
             var buscar = document.querySelector('#busqueda').value
             sessionStorage.setItem("buscar", buscar)
-            location.href="busquedas - sinregistro.html"
+            location.href="busquedas - admin.html"
             
         }
 

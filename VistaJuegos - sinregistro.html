@@ -128,7 +128,8 @@
                     var coments = document.querySelector('#comentarios')
                     mis_comentarios.forEach(comentarios => {
                         coments.innerHTML += `<h3 class="parrafoComentario">${comentarios.usuario}</h3>
-                                                <p style="padding: 10px;">${comentarios.comentario}</p>`
+                                                <p style="padding: 10px;">${comentarios.comentario}</p>
+                                                <p style="padding: 10px;">${comentarios.fecha}</p>`
                     });
                 })
         }

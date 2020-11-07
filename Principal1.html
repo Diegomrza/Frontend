@@ -79,7 +79,7 @@
                             <li><a href="Principal1 - biblioteca.html">Mi biblioteca</a></li>
                             <li><a href="vistaperfil.html">Perfil</a></li>
                             <li><a href="cargaMasiva.html">Carga Masiva</a></li>
-                            <li><a href="#">CRUD de videjuegos</a></li>
+                            <li><a href="CRUD.html">CRUD de videjuegos</a></li>
                             <li><a href="#">Generar Reportes</a></li>
                             <li><a href="RegistroAdmins.html">Crear Usuario</a></li>
                         </ul>
@@ -112,7 +112,7 @@
         function cargar() {
             var nombre = sessionStorage.getItem('usuario');
 
-            fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos', {
+            fetch('http://127.0.0.1:5000/obtenerJuegos', {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -148,7 +148,7 @@
 
             var buscar = document.querySelector('#busqueda').value
             sessionStorage.setItem("buscar", buscar)
-            location.href = "busquedas.html"
+            location.href = "busquedas - admin.html"
             
         }
 

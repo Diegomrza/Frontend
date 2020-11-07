@@ -16,7 +16,7 @@
             <div id="cerr">
                 <img id="LogoTienda" src="Logo Tienda.jpg" alt="">
                 <input type="text" id="buscar" placeholder="Buscar videojuegos por género">
-                <button type="button" id="botonBusqueda">Buscar</button>
+                <button onclick="buscar()" type="button" id="botonBusqueda">Buscar</button>
                 <a href="loginvista.html" id="botonHeader">Cerrar Sesión</a>
             </div>
         </div>
@@ -186,7 +186,7 @@
                 })
                 .then(response => {
                     alert(`Comentario agregado exitosamente!`)
-                    location.href=`VistaJuegos.html?id=${id}&iduser=${iduser}`
+                    location.href=`VistaJuegos - admin.html?id=${id}&iduser=${iduser}`
                 })
 
         }
@@ -214,12 +214,19 @@
 
                     mis_comentarios.forEach(comentarios => {
                         coments.innerHTML += `<h3 class="parrafoComentario">${comentarios.usuario}</h3>
-                                                 <p style="padding: 10px;">${comentarios.comentario}</p>`
+                                                 <p style="padding: 10px;">${comentarios.comentario}</p>
+                                                 <p style="padding: 10px;">${comentarios.fecha}</p>`
 
 
                     });
                 })
 
+        }
+
+        function buscar() {
+            var buscar = document.querySelector('#buscar').value
+            sessionStorage.setItem("buscar", buscar)
+            location.href = "busquedas - admin.html"
         }
 
 

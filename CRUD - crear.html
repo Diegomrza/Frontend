@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CRUD crear-juego</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="VistaJuegos.css">
+</head>
+
+<body>
+
+    <div id="contenedor0">
+        <!--header-->
+        <div id="header0">
+            <div id="cerr">
+                <img id="LogoTienda" src="Logo Tienda.jpg" alt="">
+                <input type="text" id="buscar" placeholder="Buscar videojuegos por género">
+                <button type="button" id="botonBusqueda">Buscar</button>
+                <a href="" id="botonHeader">Cerrar Sesión</a>
+            </div>
+        </div>
+        <!--nav-->
+        <div id="nav0">
+            <ul>
+                <li id="pestaña1"><a href="vistaperfil.html">Perfil</a></li>
+                <li id="pestaña2"><a href="Principal1 - biblioteca.html">Mi Biblioteca</a></li>
+                <li id="pestaña3"><a href="Principal1 - Catálogo.html">Catálogo de videojuegos</a></li>
+                <li id="pestaña4"><a href="cargaMasiva.html">Carga Masiva</a></li>
+                <li id="pestaña5"><a href="CRUD.html">CRUD</a></li>
+                <li id="pestaña6"><a href="">Generar Reportes</a></li>
+                <li id="pestaña7"><a href="RegistroAdmins.html">Crear usuario</a></li>
+            </ul>
+        </div>
+        <!--banner-->
+        <!--contenido-->
+        <div id="contenido111">
+
+            <input id="nombre-crear" class="inputs-crear" type="text" placeholder="Nombre"><br>
+            <input id="anio-crear" class="inputs-crear" type="text" placeholder="Año"><br>
+            <input id="precio-crear" class="inputs-crear" type="text" placeholder="Precio"><br>
+            <input id="categoria1-crear" class="inputs-crear" type="text" placeholder="Categoria 1"><br>
+            <input id="categoria2-crear" class="inputs-crear" type="text" placeholder="Categoria 2"><br>
+            <input id="categoria3-crear" class="inputs-crear" type="text" placeholder="Categoria 3"><br>
+            <input id="foto-crear" class="inputs-crear" type="text" placeholder="Foto"><br>
+            <input id="banner-crear" class="inputs-crear" type="text" placeholder="Banner"><br>
+            <input id="descripcion-crear" class="inputs-crear" type="text" placeholder="Descripción"><br>
+
+            <button onclick="crear()" type="button" class="botones-ver">Crear</button>
+            <button onclick="cancelar()" type="button" class="botones-ver">Cancelar</button>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function crear() {
+            var nombre = document.getElementById('nombre-crear').value
+            var anio = document.getElementById('anio-crear').value
+            var precio = document.getElementById('precio-crear').value
+            var categoria1 = document.getElementById('categoria1-crear').value
+            var categoria2 = document.getElementById('categoria2-crear').value
+            var categoria3 = document.getElementById('categoria3-crear').value
+            var foto = document.getElementById('foto-crear').value
+            var banner = document.getElementById('banner-crear').value
+            var descripcion = document.getElementById('descripcion-crear').value
+
+            var objeto = {
+                'nombre': nombre,
+                'anio': anio,
+                'precio': precio,
+                'categoria1': categoria1,
+                'categoria2': categoria2,
+                'categoria3': categoria3,
+                'foto': foto,
+                'banner': banner,
+                'descripcion': descripcion
+            }
+            fetch('http://127.0.0.1:5000/juegos/', {
+                method: 'POST',
+                body: JSON.stringify(objeto),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .catch(error => {
+                })
+                .then(response => {
+                });
+        }
+
+        function cancelar() {
+            location.href = "CRUD.html"
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>CRUD</title>
+    <title>CRUD eliminar-juego</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="VistaJuegos.css">
@@ -17,7 +17,7 @@
                 <img id="LogoTienda" src="Logo Tienda.jpg" alt="">
                 <input type="text" id="buscar" placeholder="Buscar videojuegos por género">
                 <button type="button" id="botonBusqueda">Buscar</button>
-                <a href="loginvista.html" id="botonHeader">Cerrar Sesión</a>
+                <a href="" id="botonHeader">Cerrar Sesión</a>
             </div>
         </div>
         <!--nav-->
@@ -36,13 +36,25 @@
         <!--contenido-->
         <div id="contenido">
 
-            <div id="crud">
+            <div id="section">
+                <img id="imagenPortada" src="" alt="">
+            </div>
+            <!--aside-->
+            <div id="aside">
 
-                <button onclick="crear()" id="boton1" type="button">Crear videojuego</button><br>
-                <button onclick="ver()" id="boton2" type="button">Ver videojuego</button><br>
-                <button onclick="modificar()" id="boton3" type="button">Modificar videojuego</button><br>
-                <button onclick="eliminar()" id="boton4" type="button">Eliminar videjuego</button><br>
+                <h2 id="titulo"></h2>
+                <ul>
+                    <li id="categoria1" class="categori"></li>
+                    <li id="categoria2" class="categori"></li>
+                    <li id="categoria3" class="categori"></li>
+                </ul>
 
+                <h2 id="precio"></h2>
+                <h4 id="año"></h4>
+                <p id="descripcion">
+                </p>
+
+                <button onclick="Agregar()" id="biblioteca" type="button">Agregar a mi biblioteca</button>
             </div>
 
         </div>
@@ -51,21 +63,7 @@
 
     <script>
 
-        function crear(){
-            location.href="CRUD - crear.html"
-        }
-
-        function ver(){
-            location.href="CRUD - ver.html"
-        }
-
-        function modificar(){
-            location.href="CRUD - modificar.html"
-        }
-
-        function eliminar(){
-            location.href="CRUD - eliminar.html"
-        }
+        
 
     </script>
 

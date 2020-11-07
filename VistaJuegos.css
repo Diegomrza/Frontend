@@ -55,6 +55,10 @@ body{
     border-radius: 5px 60px 60px 5px;
 }
 
+#botonBusqueda:hover{
+    background-color: red;
+}
+
 #botonHeader, #botonHeader2{
     margin: 0.5em;
     float: right;
@@ -73,6 +77,36 @@ body{
     padding: 5px;
     display: inline-block;
 }
+
+#pestaña1:hover{
+    background-color: white;
+    border-radius: 1em;
+}
+#pestaña2:hover{
+    background-color: white;
+    border-radius: 1em;
+}
+#pestaña3:hover{
+    background-color: white;
+    border-radius: 1em;
+}
+#pestaña4:hover{
+    background-color: white;
+    border-radius: 1em;
+}
+#pestaña5:hover{
+    background-color: white;
+    border-radius: 1em;
+}
+#pestaña6:hover{
+    background-color: white;
+    border-radius: 1em;
+}
+#pestaña7:hover{
+    background-color: white;
+    border-radius: 1em;
+}
+
 /*Banner*/
 #banner{
     height: 20%;
@@ -89,6 +123,14 @@ body{
     height: 45%;
     margin: 1em;
 }
+
+#contenedor0 #contenido111{
+    height: 100%;
+    width: 50%;
+    margin: 0px auto;
+    border-radius: 1em;
+}
+
 
 #section{
     height: 100%;
@@ -230,4 +272,36 @@ body{
     margin: 1em;
     padding: 1em;
     margin-left: 26%;
+}
+
+#contenido #crud #boton1:hover{
+    background-color: red;
+}
+#contenido #crud #boton2:hover{
+    background-color: red;
+}
+#contenido #crud #boton3:hover{
+    background-color: red;
+}
+#contenido #crud #boton4:hover{
+    background-color: red;
+}
+
+.inputs-crear{
+    position: relative;
+    left: 190px;
+    height: 25px;
+    width: 200px;
+    margin: 1em;
+}
+
+.botones-ver{
+    position: relative;
+    left: 80px;
+    height: 50px;
+    width: 200px;
+    margin: 1.5em;
+}
+.botones-ver:hover{
+    background-color: red;
 }
