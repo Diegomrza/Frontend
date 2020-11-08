@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CRUD Modificar</title>
+    <title>CRUD vista</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -93,7 +93,7 @@
     <div class="related-products">
         <div class="product">
             <div id="gameCards" class="row">
-
+               
             </div>
         </div>
     </div>
@@ -127,7 +127,7 @@
                     mis_juegos.forEach(juego => {
                         game_cards.innerHTML += `<div class="col-md-3">
                     <div class="s_product">
-                        <a href="VistaJuegos - admin.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}"></a>
+                        <a href="VistaJuegos - admin.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}">
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -136,11 +136,11 @@
                                 <br>
                                 <h5 style="text-align: center; color:white;">Q.${juego.precio}</h5>
                                 <br>
-                                <button value="${juego.id}" class="botonesCrudModificar" style="position:relative; top: -10px; left:115px; width: 80px; height: 45px;" onclick="modificar(this)" type="button">Modificar juego</button>
+                                <button class="botonesCrudVer" style="position:relative; top: -10px; left:115px; width: 80px; height: 30px;" onclick="vista()" type="button">Ver juego</button>
                             </div>
                         </div>
                     </div></br>
-                </div>`
+                </div></a>`
                     });
                 })
         }
@@ -151,10 +151,8 @@
             location.href = "busquedas.html"
         }
 
-        function modificar(boton) {
-        
-            location.href = `modificarJuegos.html?id=${boton.value}`
-
+        function vista(){
+            location.href="VistaJuegos.html"
         }
 
     </script>

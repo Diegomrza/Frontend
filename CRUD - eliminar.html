@@ -2,68 +2,174 @@
 <html lang="en">
 
 <head>
-    <title>CRUD eliminar-juego</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="VistaJuegos.css">
+    <title>CRUD Eliminar</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/jquery.bxSlider.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body onload="cargar()">
+    <header>
+        <section class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                        <div class="a-right">
+                            <a href="loginvista.html">
+                                <p><span><i class="fa fa-user"></i></span>Cerrar Sesión</p>
+                            </a>
 
-    <div id="contenedor0">
-        <!--header-->
-        <div id="header0">
-            <div id="cerr">
-                <img id="LogoTienda" src="Logo Tienda.jpg" alt="">
-                <input type="text" id="buscar" placeholder="Buscar videojuegos por género">
-                <button type="button" id="botonBusqueda">Buscar</button>
-                <a href="" id="botonHeader">Cerrar Sesión</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!--nav-->
-        <div id="nav0">
-            <ul>
-                <li id="pestaña1"><a href="vistaperfil.html">Perfil</a></li>
-                <li id="pestaña2"><a href="Principal1 - biblioteca.html">Mi Biblioteca</a></li>
-                <li id="pestaña3"><a href="Principal1 - Catálogo.html">Catálogo de videojuegos</a></li>
-                <li id="pestaña4"><a href="cargaMasiva.html">Carga Masiva</a></li>
-                <li id="pestaña5"><a href="CRUD.html">CRUD</a></li>
-                <li id="pestaña6"><a href="">Generar Reportes</a></li>
-                <li id="pestaña7"><a href="RegistroAdmins.html">Crear usuario</a></li>
-            </ul>
-        </div>
-        <!--banner-->
-        <!--contenido-->
-        <div id="contenido">
+        </section>
+        <section class="header-catagory">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
 
-            <div id="section">
-                <img id="imagenPortada" src="" alt="">
-            </div>
-            <!--aside-->
-            <div id="aside">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="post" action="#">
 
-                <h2 id="titulo"></h2>
-                <ul>
-                    <li id="categoria1" class="categori"></li>
-                    <li id="categoria2" class="categori"></li>
-                    <li id="categoria3" class="categori"></li>
-                </ul>
+                                    <input id="busqueda" type="text" placeholder="Buscar">
 
-                <h2 id="precio"></h2>
-                <h4 id="año"></h4>
-                <p id="descripcion">
-                </p>
+                                    <select>
+                                        <option>Acción</option>
+                                        <option>Terror</option>
+                                        <option>Aventura</option>
+                                        <option>Puzzle</option>
+                                        <option>Misterio</option>
+                                    </select>
 
-                <button onclick="Agregar()" id="biblioteca" type="button">Agregar a mi biblioteca</button>
+                                    <button type="button" onclick="buscar()"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <div>
+                <img id="Logo" src="Logo Tienda.jpg" alt="">
+            </div>
+        </section>
+        <div class="clear"></div>
+        <section class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="Principal1 - Catálogo.html">Catálogo de videjuegos</a></li>
+                            <li><a href="Principal1 - biblioteca.html">Mi biblioteca</a></li>
+                            <li><a href="vistaperfil.html">Perfil</a></li>
+                            <li><a href="cargaMasiva.html">Carga Masiva</a></li>
+                            <li><a href="CRUD.html">CRUD de videjuegos</a></li>
+                            <li><a href="#">Generar Reportes</a></li>
+                            <li><a href="RegistroAdmins.html">Crear Usuario</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <div class="related-products">
+        <div class="product">
+            <div id="gameCards" class="row">
+
+            </div>
         </div>
+    </div>
 
     </div>
 
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.bxSlider.js"></script>
+
+
     <script>
 
-        
+        function cargar() {
+            var nombre = sessionStorage.getItem('usuario');
+
+            fetch('http://127.0.0.1:5000/obtenerJuegos', {
+
+            }).then(res => res.json())
+                .catch(err => {
+                    console.log(err)
+                    alert('Ocurrio un error al momento de obtener los juegos')
+                })
+                .then(response => {
+
+                    var mis_juegos = response;
+                    console.log(mis_juegos)
+                    var game_cards = document.querySelector('#gameCards')
+
+                    mis_juegos.forEach(juego => {
+                        game_cards.innerHTML += `<div class="col-md-3">
+                    <div class="s_product">
+                        <a href="VistaJuegos - admin.html?id=${juego.id}&iduser=${sessionStorage.getItem('id')}"><img id="imagen" alt="" src="${juego.foto}"></a>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="rate">
+                                <h3 style="text-align: center; color: white;">${juego.nombre}</h3>
+                                <br>
+                                <h5 style="text-align: center; color:white;">Q.${juego.precio}</h5>
+                                <br>
+                                <button value="${juego.id}"  class="botonesCrudEliminar" style="position:relative; top: -10px; left:115px; width: 80px; height: 45px;" onclick="eliminar(this)" type="button">Eliminar juego</button>
+                            </div>
+                        </div>
+                    </div></br>
+                </div>`
+                    });
+                })
+        }
+
+        function buscar() {
+            var buscar = document.querySelector('#busqueda').value
+            sessionStorage.setItem("buscar", buscar)
+            location.href = "busquedas.html"
+        }
+
+        function eliminar(boton) {
+
+            id = boton.value
+            console.log(id)
+
+            fetch(`http://127.0.0.1:5000/juegosEliminar/${id}`, {
+                method: 'DELETE',
+            }).then(res => res.json())
+                .catch(error => {
+                    console.error('Error:', error)
+                    alert("Ocurrio un error al consumir la API, revise la consola")
+                })
+                .then(response => {
+                    console.log('Success:', response);
+                    alert(response.message)
+                    location.href="CRUD.html"
+                })
+
+        }
 
     </script>
 

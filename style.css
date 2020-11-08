@@ -1771,3 +1771,15 @@ section.featured {
   margin-top: 100px;  
   width: 300px;
 }
+
+.botonesCrudEliminar:hover{
+  background-color: red;
+}
+
+.botonesCrudModificar:hover{
+  background-color: yellow;
+}
+
+.botonesCrudVer:hover{
+  background-color: green;
+}

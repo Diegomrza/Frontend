@@ -305,3 +305,33 @@ body{
 .botones-ver:hover{
     background-color: red;
 }
+
+#contenedor50{
+    height: 800px;
+}
+
+#contenido50{
+    height: 50%;
+}
+
+#section50{
+    width: 45%;
+    height: 90%;
+    float: left;
+    margin: 1em;
+}
+
+#aside50{
+    width: 45%;
+    height: 90%;
+    float: right;
+    margin: 1em;
+}
+
+.inpuh{
+    position: relative;
+    left: 130px;
+    margin: 1.5em;
+    height: 30px;
+    font-size: 20px;
+}

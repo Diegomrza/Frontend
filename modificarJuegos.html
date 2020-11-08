@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Vista Juegos Admin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="VistaJuegos.css">
+</head>
+
+<body onload="cargar()">
+
+    <div id="contenedor50">
+        <!--header-->
+        <div>
+            <div id="cerr">
+                <img id="LogoTienda" src="Logo Tienda.jpg" alt="">
+                <input type="text" id="buscar" placeholder="Buscar videojuegos por género">
+                <button onclick="buscar()" type="button" id="botonBusqueda">Buscar</button>
+                <a href="loginvista.html" id="botonHeader">Cerrar Sesión</a>
+            </div>
+        </div>
+        <!--nav-->
+        <div>
+            <ul>
+                <li id="pestaña1"><a href="vistaperfil.html">Perfil</a></li>
+                <li id="pestaña2"><a href="Principal1 - biblioteca.html">Mi Biblioteca</a></li>
+                <li id="pestaña3"><a href="Principal1 - Catálogo.html">Catálogo de videojuegos</a></li>
+                <li id="pestaña4"><a href="cargaMasiva.html">Carga Masiva</a></li>
+                <li id="pestaña5"><a href="CRUD.html">CRUD</a></li>
+                <li id="pestaña6"><a href="">Generar Reportes</a></li>
+                <li id="pestaña7"><a href="RegistroAdmins.html">Crear usuario</a></li>
+            </ul>
+        </div>
+        <!--contenido-->
+        <div id="contenido50">
+            <!--section-->
+            <h1 style="position: absolute; top: 300px; left: 535px; height: 30px; font-size: 50px;" >Modificar</h1>
+            <input style="position: absolute; top: 440px; left: 520px; height: 30px; font-size: 20px;" id="nombrem" type="text">
+            <button type="button" onclick="modificar()" style="position: absolute; top: 600px; left: 595px; height: 30px; width: 90px; padding: 5px; font-size: 15px;">Aceptar</button>
+            <div id="section50">
+                
+                <input id="bannerm" class="inpuh" type="text"><br>
+                <input id="añom" class="inpuh" type="text"><br>
+                <input id="preciom" class="inpuh" type="text"><br>
+                <input id="descripciones" class="inpuh" type="text"><br>
+
+            </div>
+            <!--aside-->
+            <div id="aside50">
+                
+                <input id="categoriaUno" class="inpuh" type="text"><br>
+                <input id="categoriaDos" class="inpuh" type="text"><br>
+                <input id="categoriaTres" class="inpuh" type="text"><br>
+                <input id="fotografia" class="inpuh" type="text"><br>
+
+            </div>
+
+        </div>
+        <!--comentarios-->
+        
+    </div>
+
+    <script>
+
+        function cargar() {
+
+            const queryString = window.location.search;
+            const URLParams = new URLSearchParams(queryString);
+            const id = URLParams.get('id')
+            console.log(id)
+
+            fetch(`http://127.0.0.1:5000/juego/${id}`, {
+
+            }).then(res => res.json())
+                .catch(err => {
+                    console.log(err)
+                })
+                .then(response => {
+
+                    document.querySelector('#bannerm').value = response.banner
+                    document.querySelector('#fotografia').value = response.foto
+                    document.querySelector('#nombrem').value = response.nombre
+                    document.querySelector('#categoriaUno').value = response.categoria1
+                    document.querySelector('#categoriaDos').value = response.categoria2
+                    document.querySelector('#categoriaTres').value = response.categoria3
+                    document.querySelector('#preciom').value = response.precio
+                    document.querySelector('#añom').value = response.anio
+                    document.querySelector('#descripciones').value = response.descripcion
+
+
+                })
+        }
+
+        function buscar() {
+            var buscar = document.querySelector('#buscar').value
+            sessionStorage.setItem("buscar", buscar)
+            location.href = "busquedas - admin.html"
+        }
+
+        function modificar(){
+
+            const queryString = window.location.search;
+            const URLParams = new URLSearchParams(queryString);
+            const id = URLParams.get('id')
+
+            var nombre = document.querySelector('#nombrem').value;
+            var anio = document.querySelector('#añom').value;
+            var precio = document.querySelector('#preciom').value;
+            var categoria1 = document.querySelector('#categoriaUno').value;
+            var categoria2 = document.querySelector('#categoriaDos').value;
+            var categoria3 = document.querySelector('#categoriaTres').value;
+            var foto = document.querySelector('#fotografia').value;
+            var banner = document.querySelector('#bannerm').value;
+            var descripcion = document.querySelector('#descripciones').value;
+
+            var objeto = {
+                'nombre': nombre,
+                'anio': anio,
+                'precio': precio,
+                'categoria1': categoria1,
+                'categoria2': categoria2,
+                'categoria3': categoria3,
+                'foto': foto,
+                'banner': banner,
+                'descripcion': descripcion
+            }
+            console.log(objeto)
+
+            fetch(`http://127.0.0.1:5000/modJuegos/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(objeto),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .catch(err => {
+                    console.error('Error', err)
+                    window.alert("ocurrio un error, ver consola")
+                })
+                .then(response => {
+                    console.log('Success:', response);
+                    alert(response.message)
+                    location.href="CRUD.html"
+
+                })
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
