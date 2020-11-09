@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Reportes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="VistaJuegos.css">
+    <script type="text/javascript" src="jspdf.min.js"></script>
+    <script type="text/javascript" src="jspdf.debug.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.0/jspdf.plugin.autotable.js"></script>
+
+    <script type="text/javascript">
+        function genPDFUsers() {
+
+            var doc = new jsPDF('p', 'pt');
+            var elem = document.getElementById("Users");
+            var res = doc.autoTableHtmlToJson(elem);
+
+            doc.autoTable(res.columns, res.data);
+
+
+            doc.save("ReporteUsuarios.pdf");
+        }
+
+        function genPDFJuegos() {
+
+            var doc = new jsPDF();
+            var elem = document.getElementById("Juegos");
+            var res = doc.autoTableHtmlToJson(elem);
+            doc.autoTable(res.columns, res.data,{startY: false, 
+            theme: 'grid',  
+            tableWidth: 'auto', 
+            columnWidth: 'wrap', 
+            showHeader: 'everyPage',
+            columnStyles: {
+                0: {columnWidth: 10},
+                1: {columnWidth: 11},
+                2: {columnWidth: 8},
+                3: {columnWidth: 9},
+                4: {columnWidth: 14},
+                5: {columnWidth: 14},
+                6: {columnWidth: 14},
+                7: {columnWidth: 38},
+                8: {columnWidth: 38},
+                9: {columnWidth: 30}
+            },
+            headerStyles: {theme: 'grid'},
+            styles: {
+                overflow: 'linebreak',
+                columnWidth: '100',
+                fontSize: 6,
+                overflowColumns: 'linebreak'},
+            });
+            doc.save("ReporteJuegos.pdf");
+        }
+    </script>
+
+</head>
+
+<body onload="cargar()">
+
+    <div id="contenedor0">
+        <!--header-->
+        <div id="header0">
+            <div id="cerr">
+                <img id="LogoTienda" src="Logo Tienda.jpg" alt="">
+                <input type="text" id="buscar" placeholder="Buscar videojuegos por género">
+                <button type="button" id="botonBusqueda">Buscar</button>
+                <a href="loginvista.html" id="botonHeader">Cerrar Sesión</a>
+            </div>
+        </div>
+        <!--nav-->
+        <div id="nav0">
+            <ul>
+                <li id="pestaña1"><a href="vistaperfil.html">Perfil</a></li>
+                <li id="pestaña2"><a href="Principal1 - biblioteca.html">Mi Biblioteca</a></li>
+                <li id="pestaña3"><a href="Principal1 - Catálogo.html">Catálogo de videojuegos</a></li>
+                <li id="pestaña4"><a href="cargaMasiva.html">Carga Masiva</a></li>
+                <li id="pestaña5"><a href="CRUD.html">CRUD</a></li>
+                <li id="pestaña6"><a href="GenerarReportes.html">Generar Reportes</a></li>
+                <li id="pestaña7"><a href="RegistroAdmins.html">Crear usuario</a></li>
+            </ul>
+        </div>
+        <!--banner-->
+        <!--contenido-->
+        <div id="contenido100">
+
+            <div id="juegos">
+                <table id="Juegos" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Año</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Categoria1</th>
+                            <th scope="col">Categoria2</th>
+                            <th scope="col">Categoria3</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Banner</th>
+                            <th scope="col">Descripcion</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoJuegos">
+                    </tbody>
+                </table>
+            </div>
+
+            <button id="PDFJuegos" onclick="genPDFJuegos()" type="button">Generar Reporte PDF</button>
+
+            <br>
+            <br>
+
+            <div>
+                <table id="Users" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Nombre de Usuario</th>
+                            <th scope="col">Rol</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpoUsuarios">
+
+                    </tbody>
+
+                </table>
+            </div>
+
+            <button onclick="genPDFUsers()" id="PDFUsuarios" type="button">Generar Reporte PDF</button>
+
+            <br>
+            <br>
+
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID Usuario</th>
+                            <th scope="col">ID juego</th>
+                            <th scope="col">Comentario</th>
+                            <th scope="col">Nombre de Usuario</th>
+                            <th scope="col">Fecha</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cuerpoComentarios">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script>
+        function cargar() {
+            var nombre = sessionStorage.getItem('usuario');
+            fetch('https://proyecto2-201901429.herokuapp.com/obtenerJuegos', {
+
+            }).then(res => res.json())
+                .catch(err => {
+                    console.log(err)
+                    alert('Ocurrio un error al momento de obtener los juegos')
+                })
+                .then(response => {
+
+                    var mis_juegos = response;
+
+                    var cuerpoJuegos = document.querySelector('#cuerpoJuegos')
+
+                    mis_juegos.forEach(juego => {
+                        cuerpoJuegos.innerHTML += `<tr>
+                                                        <th>  ${juego.id} </th>
+                                                        <th>  ${juego.nombre} </th>
+                                                        <th>  ${juego.anio} </th>
+                                                        <th>  ${juego.precio} </th>
+                                                        <th>  ${juego.categoria1} </th>
+                                                        <th>  ${juego.categoria2} </th>
+                                                        <th>  ${juego.categoria3} </th>
+                                                        <th id="exc">  ${juego.foto} </th>
+                                                        <th id="exc2">  ${juego.banner} </th>
+                                                        <th>  ${juego.descripcion} </th>
+                                                    </tr>`
+                    });
+                })
+            //${juego.foto}
+            //${juego.banner}
+
+            cargarUsuarios()
+        }
+
+        function cargarUsuarios() {
+            fetch('https://proyecto2-201901429.herokuapp.com/usuarios/', {
+
+            }).then(res => res.json())
+                .catch(err => {
+                    console.log(err)
+                    alert('Ocurrio un error al momento de obtener los usuarios')
+                })
+                .then(response => {
+                    var mis_usuarios = response;
+                    var cuerpoUsuarios = document.querySelector('#cuerpoUsuarios')
+                    mis_usuarios.forEach(usuarios => {
+                        cuerpoUsuarios.innerHTML += `<tr>
+                                                        <th>  ${usuarios.id} </th>
+                                                        <th>  ${usuarios.nombre} </th>
+                                                        <th>  ${usuarios.apellido} </th>
+                                                        <th>  ${usuarios.usuario} </th>
+                                                        <th>  ${usuarios.tipo} </th>
+                                                    </tr>`
+                    });
+                })
+            cargarComentarios()
+        }
+
+        function cargarComentarios() {
+            fetch('https://proyecto2-201901429.herokuapp.com/comentarios', {
+            }).then(res => res.json())
+                .catch(err => {
+                    console.log(err)
+                    alert('Ocurrio un error al momento de obtener los juegos')
+                })
+                .then(response => {
+                    var mis_Comentarios = response;
+                    var cuerpoComentarios = document.querySelector('#cuerpoComentarios')
+                    mis_Comentarios.forEach(Comentario => {
+                        cuerpoComentarios.innerHTML += `<tr>
+                                            <th>  ${Comentario.idUsuario} </th>
+                                            <th>  ${Comentario.idJuego} </th>
+                                            <th>  ${Comentario.comentario} </th>
+                                            <th>  ${Comentario.usuario} </th>
+                                            <th>  ${Comentario.fecha} </th>
+                                        </tr>`
+                    });
+                })
+        }
+    </script>
+</body>
+
+</html>

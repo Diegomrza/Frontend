@@ -28,7 +28,7 @@
                 <li id="pestaña3"><a href="Principal1 - Catálogo.html">Catálogo de videojuegos</a></li>
                 <li id="pestaña4"><a href="cargaMasiva.html">Carga Masiva</a></li>
                 <li id="pestaña5"><a href="CRUD.html">CRUD</a></li>
-                <li id="pestaña6"><a href="">Generar Reportes</a></li>
+                <li id="pestaña6"><a href="GenerarReportes.html">Generar Reportes</a></li>
                 <li id="pestaña7"><a href="RegistroAdmins.html">Crear usuario</a></li>
             </ul>
         </div>
@@ -51,9 +51,6 @@
                 <input id="banner-crear" class="inputs-crear" type="text" placeholder="Banner"><br>
             </div>
             
-
-            
-
             <button onclick="crear()" type="button" class="botones-ver">Crear</button>
             <button onclick="cancelar()" type="button" class="botones-ver">Cancelar</button>
 
@@ -85,7 +82,7 @@
                 'banner': banner,
                 'descripcion': descripcion
             }
-            fetch('http://127.0.0.1:5000/juegos/', {
+            fetch('https://proyecto2-201901429.herokuapp.com/juegos/', {
                 method: 'POST',
                 body: JSON.stringify(objeto),
                 headers: {
@@ -95,6 +92,7 @@
                 .catch(error => {
                 })
                 .then(response => {
+                    alert("Juego creado!")
                 });
         }
 

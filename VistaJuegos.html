@@ -86,7 +86,7 @@
             const id = URLParams.get('id')
             console.log(id)
 
-            fetch(`http://127.0.0.1:5000/juego/${id}`, {
+            fetch(`https://proyecto2-201901429.herokuapp.com/juego/${id}`, {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -130,7 +130,7 @@
             var objeto = {
                 'id': iduser
             }
-            fetch(`http://127.0.0.1:5000/adquirirJuego/${id}`, {
+            fetch(`https://proyecto2-201901429.herokuapp.com/adquirirJuego/${id}`, {
                 method: 'POST',
                 body: JSON.stringify(objeto),
                 headers: {
@@ -169,7 +169,7 @@
                 'comentario': comentario,
                 'usuario': user
             }
-            fetch(`http://127.0.0.1:5000/comentarios/${id}`, {
+            fetch(`https://proyecto2-201901429.herokuapp.com/comentarios/${id}`, {
                 method: 'POST',
                 body: JSON.stringify(objeto),
                 headers: {
@@ -194,7 +194,7 @@
             //Id del juego
             const id = URLParams.get('id')
 
-            fetch(`http://127.0.0.1:5000/comentarios/${id}`, {
+            fetch(`https://proyecto2-201901429.herokuapp.com/comentarios/${id}`, {
 
             }).then(res => res.json())
                 .catch(err => {

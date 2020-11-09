@@ -335,3 +335,58 @@ body{
     height: 30px;
     font-size: 20px;
 }
+
+#contenido100{
+
+    margin-top: 50px;
+}
+
+
+.table, th, tr{
+    background-color: grey;
+    color: black;
+    margin: 0 auto;
+    font-size: small;
+    border: 1px solid white;
+}
+
+#PDFJuegos{
+    text-align: center; 
+    margin-top: 20px; 
+    margin-left: 45%; 
+    height: 50px;
+    border-radius: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: darkorchid;
+}
+#PDFJuegos:hover{
+    background-color: red;
+}
+
+#PDFUsuarios{
+    text-align: center; 
+    margin-top: 20px; 
+    margin-left: 45%; 
+    height: 50px;
+    border-radius: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: darkorchid;
+}
+#PDFUsuarios:hover{
+    background-color: red;
+}
+.table{
+    table-layout: fixed;
+    width: auto;
+}
+
+#th, td{
+    width: 50px;
+    word-wrap: break-word;
+}
+
+#exc{
+
+    width: 100px;
+
+}

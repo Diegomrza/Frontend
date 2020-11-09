@@ -70,7 +70,7 @@
             const id = URLParams.get('id')
             console.log(id)
 
-            fetch(`http://127.0.0.1:5000/juego/${id}`, {
+            fetch(`https://proyecto2-201901429.herokuapp.com/juego/${id}`, {
 
             }).then(res => res.json())
                 .catch(err => {
@@ -127,7 +127,7 @@
             }
             console.log(objeto)
 
-            fetch(`http://127.0.0.1:5000/modJuegos/${id}`, {
+            fetch(`https://proyecto2-201901429.herokuapp.com/modJuegos/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify(objeto),
                 headers: {
